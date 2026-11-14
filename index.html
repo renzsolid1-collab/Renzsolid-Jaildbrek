@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RenzSolid.id</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--tile:124px;--ink:#4a3b12;--mut:#6e5a1c;--y:#ffd23f;--y2:#ffe58a;--paper:#fff3bd;--cream:#fffbe8;
+--pb:0 -4px 0 0 var(--ink),0 4px 0 0 var(--ink),-4px 0 0 0 var(--ink),4px 0 0 0 var(--ink);
+--sh:8px 10px 0 0 rgba(74,59,18,.16)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-tap-highlight-color:transparent}
+body{font-family:'VT323',monospace;font-size:21px;line-height:1.2;color:var(--ink);padding:18px 16px 30px;min-height:100vh;
+  background:repeating-conic-gradient(var(--y2) 0 25%,var(--paper) 0 50%) 0 0/calc(var(--tile)*2) calc(var(--tile)*2);background-attachment:fixed}
+#rain{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.hide{display:none!important}
+.logo{width:58px;height:58px;margin:8px auto 18px;background:var(--y);display:grid;place-items:center;font-family:'Press Start 2P',monospace;font-size:24px;
+  box-shadow:var(--pb),inset 0 -6px 0 0 rgba(74,59,18,.22),inset 0 4px 0 0 rgba(255,255,255,.55);animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+h1{font-family:'Press Start 2P',monospace;font-size:21px;line-height:1.5;text-align:center;text-shadow:3px 3px 0 var(--paper);animation:fadeUp .8s ease both}
+h1 span{color:#c98a00}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}}
+input,textarea,select{width:100%;background:#fffdf2;color:var(--ink);border:4px solid var(--ink);padding:10px 12px;font-family:'VT323',monospace;font-size:21px;transition:background .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{outline:none;background:#fff;box-shadow:0 0 0 4px rgba(255,210,63,.7)}
+input::placeholder,textarea::placeholder{color:#a8964f}
+input[type=file]{padding:8px}
+input[type=file]::file-selector-button{font-family:'Press Start 2P',monospace;font-size:9px;background:var(--y);color:var(--ink);border:3px solid var(--ink);padding:8px 10px;margin-right:10px;cursor:pointer}
+textarea{resize:vertical}
+button{font-family:'Press Start 2P',monospace;font-size:10px;line-height:1.4;color:var(--ink);background:var(--y);border:0;padding:15px 12px;width:100%;margin-top:16px;cursor:pointer;position:relative;
+  box-shadow:var(--pb),inset 0 -6px 0 0 rgba(74,59,18,.22),inset 0 4px 0 0 rgba(255,255,255,.55);transition:transform .15s ease,filter .2s}
+button:hover{filter:brightness(1.06);transform:translateY(-2px)}
+button:active{transform:translateY(4px);box-shadow:var(--pb),inset 0 4px 0 0 rgba(74,59,18,.22)}
+button:disabled{opacity:.55;cursor:default;transform:none}
+button.x{background:var(--cream)}
+.tabs{display:flex;gap:14px;padding:0 4px}
+.tabs button{margin:0;background:var(--cream)}
+.tabs button.on{background:var(--y)}
+.msg{text-align:center;color:#a03c1c;margin-top:12px;min-height:22px}
+.pill{display:inline-block;font-family:'Press Start 2P',monospace;font-size:8px;padding:5px 7px;margin-left:8px;vertical-align:middle;background:var(--ink);color:var(--y)}
+.pill.free{background:var(--cream);color:var(--mut);border:3px solid var(--ink);padding:2px 4px}
+.bar{height:30px;background:var(--paper);border:4px solid var(--ink);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--y) 0 10px,#ffc21a 10px 14px);background-size:14px 100%;animation:stripes 1s linear infinite;transition:width .15s}
+@keyframes stripes{to{background-position:14px 0}}
+.px{position:fixed;width:9px;height:9px;background:var(--y);border:2px solid var(--ink);z-index:99;pointer-events:none;margin:-5px 0 0 -5px;animation:fly .55s steps(7) forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+header{text-align:center;padding:14px 0 14px}
+header p{color:var(--mut);font-size:23px;margin-top:12px;animation:fadeUp 1s ease both}
+.panel{max-width:400px;margin:18px auto;background:var(--cream);padding:24px;box-shadow:var(--pb),var(--sh);animation:fadeUp .7s ease both}
+.panel input{margin-top:14px}
+#app{animation:fadeUp .6s ease both}
+#top{max-width:900px;margin:8px auto 18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between;background:var(--cream);padding:12px 16px;box-shadow:var(--pb),var(--sh)}
+#top span{font-size:23px}
+#top .b{display:flex;gap:14px}
+#top button{margin:0;width:auto;padding:10px 12px;font-size:8px}
+#ctrl{max-width:900px;margin:0 auto 22px}
+.search{position:relative}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink);pointer-events:none}
+.search input{padding-left:44px}
+#chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;padding:0 4px}
+.chip{margin:0;width:auto;padding:10px 12px;font-size:8px;background:var(--cream)}
+.chip.on{background:var(--y)}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:24px 20px;max-width:900px;margin:auto;padding:6px 8px}
+.card{background:var(--cream);position:relative;cursor:pointer;box-shadow:var(--pb),var(--sh);animation:cardIn .55s ease both;transition:transform .25s ease,opacity .25s ease}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px) scale(.95)}}
+.card:hover{transform:translateY(-5px)}
+.card.pick{animation:pick .33s ease both;z-index:2}
+@keyframes pick{0%{transform:scale(1)}35%{transform:scale(.92)}70%{transform:scale(1.07)}100%{transform:scale(1)}}
+#grid.picking .card:not(.pick){opacity:.45;transform:scale(.96)}
+.thumb{position:relative;border-bottom:4px solid var(--ink)}
+.thumb img{width:100%;aspect-ratio:1;object-fit:cover;display:block;image-rendering:pixelated;background:var(--y2)}
+.card.lock .thumb img{filter:grayscale(.7) brightness(.8)}
+.crown{position:absolute;top:8px;left:8px;display:inline-flex;align-items:center;gap:6px;font-family:'Press Start 2P',monospace;font-size:7px;padding:6px 7px;background:var(--ink);color:var(--y)}
+.info{padding:10px 12px 14px}
+.info b{display:block;font-size:24px;font-weight:400}
+.info small{color:var(--mut);font-size:19px;line-height:1.05;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tag{display:inline-block;margin-top:9px;font-family:'Press Start 2P',monospace;font-size:8px;padding:5px 7px;background:var(--y);border:3px solid var(--ink)}
+.kosong{text-align:center;color:var(--mut);grid-column:1/-1;padding:40px 0}
+#modal{position:fixed;inset:0;background:rgba(74,59,18,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+#box{background:var(--cream);box-shadow:var(--pb),var(--sh);padding:22px;width:100%;max-width:390px;max-height:88vh;overflow:auto;text-align:center;animation:boxIn .3s steps(5) both}
+#box.out{animation:boxOut .18s steps(3) both}
+@keyframes boxIn{from{transform:scale(.7);opacity:0}}
+@keyframes boxOut{to{transform:scale(.8);opacity:0}}
+#box img{width:116px;height:116px;object-fit:cover;border:4px solid var(--ink);image-rendering:pixelated}
+#box h2{font-family:'Press Start 2P',monospace;font-size:13px;line-height:1.6;margin:16px 0 8px}
+#box p{color:var(--mut);margin-bottom:12px}
+#box .bar{margin:20px 0 12px}
+#pct{font-family:'Press Start 2P',monospace;font-size:24px}
+#box textarea{height:180px}
+</style>
+</head>
+<body>
+<canvas id="rain"></canvas>
+<header><div class="logo">R</div><h1>Renzsolid<span>.id</span></h1><p>Pilih halaman, lalu unduh pelan-pelan</p></header>
+
+<div class="panel glass" id="auth">
+  <div class="tabs"><button id="tMasuk" class="on">Masuk</button><button id="tDaftar">Daftar</button></div>
+  <input id="user" placeholder="Username" autocapitalize="none" autocomplete="off">
+  <input id="pass" type="password" placeholder="Password (min. 4)">
+  <button id="okAuth">Masuk</button>
+  <div class="msg" id="msg"></div>
+</div>
+
+<div id="app" class="hide">
+  <div id="top" class="glass"><span id="who"></span><div class="b"><button id="btnKode">Kode Premium</button><button id="btnKeluar" class="x">Keluar</button></div></div>
+  <div id="ctrl">
+    <div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="cari" placeholder="Cari halaman..." autocomplete="off"></div>
+    <div id="chips"><button class="chip on" data-f="semua">Semua</button><button class="chip" data-f="teks">Teks</button><button class="chip" data-f="zip">ZIP</button><button class="chip" data-f="premium">Premium</button></div>
+  </div>
+  <div id="grid"><div class="kosong">Memuat...</div></div>
+</div>
+<div id="modal"><div id="box"></div></div>
+
+<script type="module">
+const V = 'https://www.gstatic.com/firebasejs/13.3.0/';
+let initializeApp, getAnalytics, getFirestore, collection, query, orderBy, onSnapshot, getDocs, getDoc, doc, setDoc, writeBatch;
+{ const m = document.getElementById('msg'); if (m) m.textContent = 'Memuat Firebase...'; }
+const _lambat = setTimeout(() => {
+  const m = document.getElementById('msg');
+  if (m && m.textContent.startsWith('Memuat')) m.textContent = 'Firebase lama dimuat. Cek internet, matikan penghemat data atau adblock.';
+}, 8000);
+try {
+  ({ initializeApp } = await import(V + 'firebase-app.js'));
+  try { ({ getAnalytics } = await import(V + 'firebase-analytics.js')); } catch (e) { getAnalytics = () => {}; }
+  ({ getFirestore, collection, query, orderBy, onSnapshot, getDocs, getDoc, doc, setDoc, writeBatch } = await import(V + 'firebase-firestore.js'));
+} catch (e) {
+  clearTimeout(_lambat);
+  const t = 'Firebase gagal dimuat (' + ((e && e.message) || e) + '). Cek internet, matikan penghemat data atau adblock, lalu muat ulang.';
+  const m = document.getElementById('msg'); if (m) m.textContent = t;
+  const b = document.getElementById('okAuth'); if (b) b.onclick = () => { if (m) m.textContent = t; };
+  throw e;
+}
+clearTimeout(_lambat);
+{ const m = document.getElementById('msg'); if (m && m.textContent.startsWith('Memuat')) m.textContent = ''; }
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQQ0HnTQtPSdlsBgrUgoWip5Lcr168OpE",
+  authDomain: "cerryad-5ac95.firebaseapp.com",
+  projectId: "cerryad-5ac95",
+  storageBucket: "cerryad-5ac95.firebasestorage.app",
+  messagingSenderId: "189973916137",
+  appId: "1:189973916137:web:92726a30a565b0f5d00378",
+  measurementId: "G-JBP89RXBDW"
+};
+const app = initializeApp(firebaseConfig);
+try { getAnalytics(app); } catch (e) {}
+const db = getFirestore(app);
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const limit = (p, ms = 15000) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error('timeout')), ms))]);
+const grid = $('grid'), modal = $('modal'), box = $('box');
+let mode = 'masuk', me = null, premium = false, items = [], offUser = null, offItems = null, mem = '', q = '', filter = 'semua';
+
+/* hash sederhana (tanpa crypto.subtle supaya jalan di semua browser) */
+function h(s) {
+  let a = 0xdeadbeef, b = 0x41c6ce57;
+  for (let i = 0; i < s.length; i++) { const c = s.charCodeAt(i); a = Math.imul(a ^ c, 2654435761); b = Math.imul(b ^ c, 1597334677); }
+  a = Math.imul(a ^ (a >>> 16), 2246822507) ^ Math.imul(b ^ (b >>> 13), 3266489909);
+  b = Math.imul(b ^ (b >>> 16), 2246822507) ^ Math.imul(a ^ (a >>> 13), 3266489909);
+  return (4294967296 * (2097151 & b) + (a >>> 0)).toString(36);
+}
+const hp = (u, p) => h('rz:' + u + ':' + p) + h(p + ':' + u + ':id');
+const sesi = {
+  get() { try { return localStorage.getItem('rz_user') || mem; } catch { return mem; } },
+  set(v) { mem = v || ''; try { v ? localStorage.setItem('rz_user', v) : localStorage.removeItem('rz_user'); } catch {} }
+};
+
+/* ---------- Login & Daftar ---------- */
+function setMode(m) {
+  mode = m;
+  $('tMasuk').classList.toggle('on', m === 'masuk'); $('tDaftar').classList.toggle('on', m === 'daftar');
+  $('okAuth').textContent = m === 'masuk' ? 'Masuk' : 'Daftar'; $('msg').textContent = '';
+}
+$('tMasuk').onclick = () => setMode('masuk'); $('tDaftar').onclick = () => setMode('daftar');
+
+$('okAuth').onclick = async () => {
+  const u = $('user').value.trim().toLowerCase(), p = $('pass').value, m = $('msg');
+  if (!/^[a-z0-9_]{3,20}$/.test(u)) return m.textContent = 'Username 3-20 huruf, angka, atau _';
+  if (p.length < 4) return m.textContent = 'Password minimal 4 karakter.';
+  $('okAuth').disabled = true; m.textContent = 'Tunggu...';
+  try {
+    const ref = doc(db, 'users', u), s = await limit(getDoc(ref));
+    if (mode === 'daftar') {
+      if (s.exists()) throw new Error('Username sudah dipakai.');
+      await limit(setDoc(ref, { username: u, pass: hp(u, p), premium: false }));
+    } else if (!s.exists() || s.data().pass !== hp(u, p)) throw new Error('Username atau password salah.');
+    sesi.set(u); mulai(u); m.textContent = '';
+  } catch (e) {
+    m.textContent = e.message === 'timeout' ? 'Tidak ada respon. Pastikan Firestore sudah dibuat (mode test) dan internet aktif.' : (e.code ? 'Gagal: ' + e.code : e.message);
+  }
+  $('okAuth').disabled = false;
+};
+$('btnKeluar').onclick = keluar;
+$('btnKode').onclick = () => bukaKode();
+
+function keluar() {
+  sesi.set(''); me = null; premium = false; items = [];
+  if (offUser) offUser(); if (offItems) offItems(); offUser = offItems = null;
+  $('auth').classList.remove('hide'); $('app').classList.add('hide');
+}
+
+function mulai(u) {
+  me = u;
+  $('auth').classList.add('hide'); $('app').classList.remove('hide');
+  if (offUser) offUser(); if (offItems) offItems();
+  offUser = onSnapshot(doc(db, 'users', u), s => {
+    if (!s.exists() && !s.metadata.fromCache) return keluar();
+    premium = !!(s.exists() && s.data().premium); bar(); render();
+  });
+  offItems = onSnapshot(query(collection(db, 'halaman'), orderBy('waktu', 'desc')), s => {
+    items = s.docs.map(d => ({ id: d.id, ...d.data() })); render();
+  }, () => { grid.innerHTML = '<div class="kosong">Gagal memuat. Cek Firestore dan rules.</div>'; });
+  bar();
+}
+if (sesi.get()) mulai(sesi.get());
+
+function bar() {
+  if (!me) return;
+  $('who').innerHTML = `${esc(me)} <span class="pill ${premium ? 'gold' : 'free'}">${premium ? 'Premium' : 'Gratis'}</span>`;
+  $('btnKode').classList.toggle('hide', premium);
+}
+
+function render() {
+  const list = items.filter(it => {
+    if (filter === 'teks' && it.tipe !== 'teks') return false;
+    if (filter === 'zip' && it.tipe !== 'zip') return false;
+    if (filter === 'premium' && !it.premium) return false;
+    return (it.nama + ' ' + it.fungsi).toLowerCase().includes(q);
+  });
+  if (!items.length) { grid.innerHTML = '<div class="kosong">Belum ada halaman.</div>'; return; }
+  if (!list.length) { grid.innerHTML = '<div class="kosong">Tidak ada hasil.</div>'; return; }
+  const CROWN = '<svg width="14" height="10" viewBox="0 0 7 5" fill="currentColor" shape-rendering="crispEdges"><rect x="0" y="0" width="1" height="1"/><rect x="3" y="0" width="1" height="1"/><rect x="6" y="0" width="1" height="1"/><rect x="0" y="1" width="2" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="5" y="1" width="2" height="1"/><rect x="0" y="2" width="7" height="1"/><rect x="0" y="3" width="7" height="2"/></svg>', LOCK = '<svg width="14" height="14" viewBox="0 0 7 7" fill="currentColor" shape-rendering="crispEdges"><rect x="2" y="0" width="3" height="1"/><rect x="1" y="1" width="1" height="2"/><rect x="5" y="1" width="1" height="2"/><rect x="0" y="3" width="7" height="4"/></svg>';
+  grid.innerHTML = list.map((it, n) => {
+    const lock = it.premium && !premium;
+    return `<div class="card ${lock ? 'lock' : ''} ${it.premium ? 'prem' : ''}" data-i="${items.indexOf(it)}" style="animation-delay:${Math.min(n * 55, 600)}ms">
+      <div class="thumb"><img src="${esc(it.gambar)}" alt="">${it.premium ? `<span class="crown">${lock ? LOCK : CROWN} Premium</span>` : ''}</div>
+      <div class="info"><b>${esc(it.nama)}</b><small>${esc(it.fungsi)}</small>
+      <span class="tag">${it.tipe === 'zip' ? 'ZIP' : 'Teks'}</span></div>
+    </div>`;
+  }).join('');
+}
+$('cari').oninput = e => { q = e.target.value.trim().toLowerCase(); render(); };
+$('chips').onclick = e => {
+  const c = e.target.closest('.chip'); if (!c) return;
+  filter = c.dataset.f;
+  document.querySelectorAll('.chip').forEach(x => x.classList.toggle('on', x === c));
+  render();
+};
+grid.addEventListener('click', e => {
+  const c = e.target.closest('.card');
+  if (!c || grid.classList.contains('picking')) return;
+  const it = items[+c.dataset.i];
+  grid.classList.add('picking'); c.classList.add('pick');
+  setTimeout(() => { grid.classList.remove('picking'); c.classList.remove('pick'); buka(it); }, 330);
+});
+modal.addEventListener('click', e => { if (e.target === modal) tutup(); });
+const tutup = () => { box.classList.add('out'); setTimeout(() => { modal.style.display = 'none'; box.classList.remove('out'); }, 180); };
+
+/* ---------- Premium ---------- */
+function bukaKode(info) {
+  box.innerHTML = `<h2>Kode Premium</h2><p>${esc(info || 'Masukkan kode dari admin.')}</p>
+    <input id="kode" placeholder="RZ-XXXX-XXXX" autocapitalize="characters">
+    <div class="msg" id="kmsg"></div>
+    <button id="akt">Aktifkan</button><button class="x" id="tutup">Tutup</button>`;
+  modal.style.display = 'flex';
+  $('tutup').onclick = tutup;
+  $('akt').onclick = async () => {
+    const k = $('kode').value.trim().toUpperCase(), m = $('kmsg');
+    if (!k) return;
+    m.textContent = 'Tunggu...';
+    try {
+      const kr = doc(db, 'kode', k), ks = await limit(getDoc(kr));
+      if (!ks.exists() || ks.data().dipakai) throw new Error('x');
+      const b = writeBatch(db);
+      b.update(kr, { dipakai: true, oleh: me });
+      b.update(doc(db, 'users', me), { premium: true, kode: k });
+      await limit(b.commit());
+      box.innerHTML = '<h2>Premium aktif</h2><p>Semua halaman Premium sudah terbuka.</p><button class="x" id="tutup">Tutup</button>';
+      $('tutup').onclick = tutup;
+    } catch (e) { m.textContent = 'Kode salah atau sudah dipakai.'; }
+  };
+}
+
+/* ---------- Buka halaman ---------- */
+function buka(it) {
+  if (it.premium && !premium) return bukaKode('Halaman ini khusus Premium. Masukkan kode dari admin untuk membuka.');
+  box.innerHTML = `<img src="${esc(it.gambar)}" alt=""><h2>${esc(it.nama)}</h2><p>${esc(it.fungsi)}</p>
+    <button id="go">${it.tipe === 'zip' ? 'Download' : 'Buka teks'}</button><button class="x" id="tutup">Tutup</button>`;
+  modal.style.display = 'flex';
+  $('tutup').onclick = tutup;
+  $('go').onclick = () => muat(it);
+}
+
+function muat(it) {
+  box.innerHTML = `<h2>Memuat...</h2><div class="bar"><i id="fill"></i></div><div id="pct">0%</div>`;
+  const fill = $('fill'), pct = $('pct');
+  let n = 0, target = 0, parts = [], teks = '', gagal = false;
+
+  if (it.tipe === 'zip') {
+    getDocs(query(collection(db, 'halaman', it.id, 'chunks'), orderBy('i'))).then(s => {
+      const total = s.docs.length; let k = 0;
+      if (!total) target = 100;
+      s.docs.forEach(d => {
+        const bin = atob(d.data().d), u = new Uint8Array(bin.length);
+        for (let j = 0; j < bin.length; j++) u[j] = bin.charCodeAt(j);
+        parts.push(u); k++; target = Math.round(k / total * 100);
+      });
+    }).catch(() => { gagal = true; });
+  } else {
+    getDoc(doc(db, 'halaman', it.id, 'isi', 'teks')).then(s => { teks = s.exists() ? s.data().teks : (it.teks || ''); target = 100; }).catch(() => { gagal = true; });
+  }
+
+  const t = setInterval(() => {
+    if (gagal) {
+      clearInterval(t);
+      box.innerHTML = '<h2>Gagal</h2><p>Data tidak bisa dibuka.</p><button class="x" id="tutup">Tutup</button>';
+      $('tutup').onclick = tutup; return;
+    }
+    if (n < target) { n++; fill.style.width = n + '%'; pct.textContent
